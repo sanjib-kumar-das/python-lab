@@ -1,40 +1,35 @@
-# write a program that computes the fuel efficiency of a multi-leg journey. the program will first prompt for startingm odometer reading and then get information about a series of legs. for each leg, the user enters the current odometer reading and the amount of gas used (separated by space). the user signals the end of trip with a blank line. the program should print the miles per gallon achieved on each leg and the total MPG for the trip
+def calculate_mpg(start_odometer, end_odometer, fuel_used):
+    distance = end_odometer - start_odometer
+    mpg = distance / fuel_used
+    return mpg
 
+def compute_fuel_efficiency():
+    start_odometer = float(input("Enter the starting odometer reading: "))
+    total_distance = 0
+    total_fuel_used = 0
 
-def main():
-    # get the starting odometer reading
-    odoStart = int(input('What is the starting odometer reading? '))
+    while True:
+        input_line = input("Enter the current odometer reading and fuel used (separated by space), or press Enter to end the trip: ")
+        
+        if input_line == "":
+            break
 
-    # initialize total miles and total fuel consumed to zero
-    milesTtl = 0; fuelTtl = 0
+        current_odometer, fuel_used = map(float, input_line.split())
 
-    # get the next odometer reading and fuel consumption, separated by a space
-    odoFuel = input('\nEnter the odometer reading and fuel consumption for this leg of the trip, separated by a space: ')
+        leg_distance = current_odometer - start_odometer
+        leg_fuel_used = fuel_used
+        leg_mpg = calculate_mpg(start_odometer, current_odometer, fuel_used)
 
-    # loop while entered text is not empty
-    while odoFuel != '' and len(odoFuel.split()) == 2:
-        # split entered text into odometer reading and fuel consumption
-        strList = odoFuel.split()
-        odoNext = int(strList[0])
-        fuelNext = int(strList[1])
+        print(f"Miles per gallon for leg: {leg_mpg:.2f}")
 
-        # print mpg for this leg (current - (start + total miles)) / fuel consumed
-        print('Fuel efficiency for this leg: {:.1f}'.format((odoNext - (odoStart + milesTtl)) / fuelNext))
+        total_distance += leg_distance
+        total_fuel_used += leg_fuel_used
+        start_odometer = current_odometer
 
-        # update total miles with current odometer reading - starting reading
-        milesTtl = odoNext - odoStart
-
-        # update total fuel consumed
-        fuelTtl += fuelNext
-
-        # get the next odometer reading and fuel consumption, separated by a space
-        odoFuel = input('\nEnter the odometer reading and fuel consumption for this leg of the trip, separated by a space: ')
-
-    # print mpg for entire trip (total miles / total fuel)
-    if fuelTtl > 0:
-        print('\nFuel efficiency for entire trip: {:.1f}\n'.format(milesTtl / fuelTtl))
+    if total_fuel_used == 0:
+        print("No fuel consumption information provided.")
     else:
-        print('\nInsufficient data was entered.')
+        total_mpg = calculate_mpg(start_odometer, start_odometer + total_distance, total_fuel_used)
+        print(f"\nTotal miles per gallon for the trip: {total_mpg:.2f}")
 
-if __name__ == '__main__':
-    main()
+compute_fuel_efficiency()
