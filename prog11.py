@@ -1,12 +1,17 @@
-# write a program that uses a while loop to determinje how long it takes for an investmnt to double at a given interest rate. the input will be an annualised interest rate, and output is the number of year it takes an investment to double. note the amount of intial investment does not matter, you can use 1$
+# write a program that uses a while loop to determine how long it takes to double an investment at a given interest rate
 
 
-principal = 1
-interest = eval(input("Enter annual interest rate in decimal: "))
-year = 0
+def main():
+    print("This program calculates how long it takes to double an investment at a given interest rate.")
+    print()
 
-while balance < 2*principal:
-    balance = balance*(1+interest)
-    year += 1
+    rate = float(input("Enter the annual interest rate: "))
+    principal = 1
+    years = 0
+    while principal < 2:
+        principal += principal * (rate/100)
+        years += 1
+    print("It takes", years, "years to double your investment.")
 
-print("Years to double: ", year)
+if __name__ == "__main__":
+    main()

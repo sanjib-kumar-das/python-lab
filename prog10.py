@@ -1,4 +1,27 @@
-# the days of the year are often numbers from 1 through 365(or 366). this number can be computed in three steps using int arithmetic :- dayNum = 31(month-1)+day or if the month is after february subtract(4 months+23)/10 or if its a leap year and after february 29, add 1
+# calculate day number from date and month
+
+
+def main():
+    print("This program calculates the day number within the year")
+    print("for a date that you will enter.")
+
+    date = int(input("Please enter the date: "))
+    month = int(input("Please enter the month: "))
+    year = int(input("Please enter the year: "))
+
+    if(year % 4 != 0 or year % 400 != 0):
+        day = 31 * (month - 1) + date
+        if month > 2:
+            day = day - ((4 * month) + 23) // 10
+    elif (year % 4 == 0 or year % 400 == 0):
+        day = 31 * (month - 1) + date
+        if month > 2:
+            day = day - ((4 * month) + 23) // 10
+            day = day + 1
+    print("The day number is", day)
+    
+if __name__ == "__main__":
+    main()
 
 
 
