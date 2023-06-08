@@ -1,12 +1,14 @@
-# write a program that removes any repeated items from a list so that each item appears at most once.
+# write a program that removes any repeated items from a list so that each item appears at most once
 
 def main():
-    print("This program removes any repeated items from a list so that each item appears at most once.")
-    list1 = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5]
-    list2 = []
-    for i in list1:
-        if i not in list2:
-            list2.append(i)
-    print(list2)
+    user_list = input("Please enter a list of numbers separated by a comma: ")
+    user_list = user_list.split(",")
+    user_list = [int(i) for i in user_list]
+    print(user_list)
+    new_list = []
+    for i in user_list:
+        if i not in new_list:
+            new_list.append(i)
+    print(new_list)
 if __name__ == "__main__":
     main()
